@@ -13,21 +13,23 @@ func _ready():
 	# Now create other players
 	var otherPlayer
 	for i in globals.otherPlayersIds:
-		print("'i': " + str(i))
 		otherPlayer = preload("res://Player.tscn").instance()
 		otherPlayer.set_name(str(i))
-		print("Player has name " + otherPlayer.get_name())
-		otherPlayer.set_network_master(i)
-		print("Player network master set to " + str(otherPlayer.get_network_master()))
+		otherPlayer.set_network_master(int(i))
+		print(str(i) + " is now network_master")
 		add_child(otherPlayer)
 	
 	get_tree().get_root().print_tree_pretty()
 
 func leaveGame(id):
-	rpc("removePlayer", id)
-	get_tree().quit()
+	if(is_network_master()):
+		rpc("removePlayer", id)
+	else:
+		print( str(id) + " tried to remove player despite not being network_master")
 
 sync func removePlayer(id):
 	print("Removing player " + str(id))
-	globals.otherPlayersIds.erase(id)
+	globals.otherPlayersIds.erase(int(id))
 	remove_child(get_node("./" + id))
+	if(get_tree().get_network_unique_id() == int(id)):
+		get_tree().quit()

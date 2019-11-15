@@ -1,8 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Lobby.gd" type="Script" id=1]
 
 [sub_resource type="StyleBoxFlat" id=1]
+
+[sub_resource type="StyleBoxFlat" id=2]
 
 [node name="Lobby" type="Node2D"]
 script = ExtResource( 1 )
@@ -50,5 +52,16 @@ margin_top = -54.0
 margin_right = 219.0
 margin_bottom = -10.0
 text = "127.0.0.1"
+
+[node name="LavelConnFail" type="Label" parent="ButtonJoin"]
+visible = false
+margin_left = -321.0
+margin_top = -147.0
+margin_right = 118.0
+margin_bottom = -87.0
+custom_styles/normal = SubResource( 2 )
+align = 1
+valign = 1
+
 [connection signal="pressed" from="ButtonHost" to="." method="_on_ButtonHost_pressed"]
 [connection signal="pressed" from="ButtonJoin" to="." method="_on_ButtonJoin_pressed"]

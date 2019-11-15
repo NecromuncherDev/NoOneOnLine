@@ -2,13 +2,13 @@ extends Node2D
 
 var speed = 5
 
-slave func setPosition(pos):
+puppet func setPosition(pos):
 	position = pos
 
-slave func setRotation(rot):
+puppet func setRotation(rot):
 	$Sprite.rotation = rot
 
-slave func setNameTag(nameTag):
+puppet func setNameTag(nameTag):
 	$NameTag.text = nameTag
 	print("NameTag set to '" + nameTag + "'")
 
