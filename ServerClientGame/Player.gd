@@ -47,7 +47,7 @@ func _process(delta):
 			if(get_tree().is_network_server()):
 				shutItDown()
 			else:
-				get_parent().leaveGame(self.get_name())
+				rpc_unreliable("leaveGame", get_tree().get_network_unique_id())
 	
 		rpc_unreliable("setPosition", Vector2(position.x - moveByX, position.y))
 		rpc_unreliable("setRotation", $Sprite.rotation)
